@@ -15,7 +15,7 @@ dependencies:
   pre:
     - cp Tests/Functionnal/app/config/parameters.yml.dist Tests/Functionnal/app/config/parameters.yml
     - echo "PHP_ROOT = ${PHP_ROOT}"
-    - ls -l "$PHP_ROOT"
+    - ls -l "$PHP_ROOT" || echo "failed"
     - echo "memory_limit = 1024M" > "$PHP_ROOT/$(phpenv global)/etc/conf.d/memory.ini"
     - echo "always_populate_raw_post_data=-1" > "$PHP_ROOT/$(phpenv global)/etc/conf.d/post_data.ini"
     - >
