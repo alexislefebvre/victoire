@@ -12,7 +12,7 @@ machine:
 dependencies:
   pre:
     - cp Tests/Functionnal/app/config/parameters.yml.dist Tests/Functionnal/app/config/parameters.yml
-    - if [ -d /opt/circleci/php ] ; then echo "Ubuntu 14.04 Trusty" && PHP_ROOT="/opt/circleci/php" ; else echo "Ubuntu 12.04 Precise" && PHP_ROOT="~/.phpenv/versions" ; fi
+    - if [ -d /opt/circleci/php ] ; then echo "Ubuntu 14.04 Trusty" && export PHP_ROOT="/opt/circleci/php" ; else echo "Ubuntu 12.04 Precise" && export PHP_ROOT="~/.phpenv/versions" ; fi
     - echo "PHP_ROOT = ${PHP_ROOT}"
     - ls -l $PHP_ROOT
     - echo "memory_limit = 1024M" > $PHP_ROOT/$(phpenv global)/etc/conf.d/memory.ini
