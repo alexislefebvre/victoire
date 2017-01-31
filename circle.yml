@@ -9,7 +9,7 @@ machine:
   php:
     version: 7.0.4
   environment:
-    PHP_ROOT: $(if [ -d /opt/circleci/php ] ; then echo "/opt/circleci/php" ; else echo "~/.phpenv/versions" ; fi)
+    PHP_ROOT: $(if [ -d /opt/circleci/php ] ; then echo /opt/circleci/php ; else echo ~/.phpenv/versions ; fi)
 
 dependencies:
   pre:
