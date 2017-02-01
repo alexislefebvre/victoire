@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "03bdc21fc3807bcbca47d0299b8365d8",
+    "content-hash": "c8f9db0e2697e07cc2c8d4fe3301468f",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -4991,12 +4991,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/lenybernard/Mink.git",
+                "url": "https://github.com/minkphp/Mink.git",
                 "reference": "afd916b3f179a2f8a2b47cb83685bfbcb2c1f193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lenybernard/Mink/zipball/afd916b3f179a2f8a2b47cb83685bfbcb2c1f193",
+                "url": "https://api.github.com/repos/minkphp/Mink/zipball/afd916b3f179a2f8a2b47cb83685bfbcb2c1f193",
                 "reference": "afd916b3f179a2f8a2b47cb83685bfbcb2c1f193",
                 "shasum": ""
             },
