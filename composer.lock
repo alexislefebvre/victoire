@@ -5046,7 +5046,7 @@
             "support": {
                 "source": "https://github.com/lenybernard/Mink/tree/master"
             },
-            "time": "2016-02-23 23:26:01"
+            "time": "2016-02-23T23:26:01+00:00"
         },
         {
             "name": "behat/mink-browserkit-driver",
