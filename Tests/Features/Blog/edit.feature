@@ -30,4 +30,5 @@ Background:
         When I fill in "article_settings_translations_fr_slug" with "new-custom-slug"
         And I follow "Mettre à jour"
         And I wait 5 seconds
+        Then print current URL
         Then I should be on "/fr/the-jedi-network/new-custom-slug"
