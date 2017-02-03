@@ -49,7 +49,6 @@
         "friendsofvictoire/text-widget": "~2.0",
         "friendsofvictoire/button-widget": "~2.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "infinite-networks/form-bundle": "dev-master",
         "jms/di-extra-bundle": "~1.7",
         "jms/serializer-bundle": "^1.0",
         "jms/translation-bundle": "^1.2",
@@ -106,10 +105,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/lenybernard/mink"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Charlie-Lucas/InfiniteFormBundle"
         }
     ],
     "extra": {

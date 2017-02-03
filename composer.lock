@@ -1604,65 +1604,6 @@
             "time": "2015-11-10 17:04:01"
         },
         {
-            "name": "infinite-networks/form-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Charlie-Lucas/InfiniteFormBundle.git",
-                "reference": "4819d85c395918ee58d6e2f9f19ce9fe84f03718"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Charlie-Lucas/InfiniteFormBundle/zipball/4819d85c395918ee58d6e2f9f19ce9fe84f03718",
-                "reference": "4819d85c395918ee58d6e2f9f19ce9fe84f03718",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/common": "~2.3",
-                "php": ">=5.3.2",
-                "symfony/form": "~2.3",
-                "symfony/framework-bundle": "~2.3"
-            },
-            "conflict": {
-                "twig/twig": "<1.12"
-            },
-            "require-dev": {
-                "components/jquery": "*",
-                "components/qunit": "*",
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.3",
-                "robloach/component-installer": "~0.1.1",
-                "symfony/phpunit-bridge": "^2.7",
-                "symfony/symfony": "^2.3.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Infinite\\FormBundle\\": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim Nagel",
-                    "email": "t.nagel@infinite.net.au"
-                }
-            ],
-            "description": "A collection of useful form types and extensions for Symfony2",
-            "support": {
-                "issues": "https://github.com/infinite-networks/InfiniteFormBundle/issues",
-                "source": "https://github.com/Charlie-Lucas/InfiniteFormBundle/tree/master"
-            },
-            "time": "2015-12-10 15:09:13"
-        },
-        {
             "name": "ircmaxell/password-compat",
             "version": "1.0.x-dev",
             "source": {
@@ -6892,7 +6833,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "infinite-networks/form-bundle": 20,
         "sensio/distribution-bundle": 20,
         "snc/redis-bundle": 20
     },
