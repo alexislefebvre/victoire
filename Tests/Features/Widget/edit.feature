@@ -70,10 +70,13 @@ Feature: Edit a widget
         And I should see "Le Côté Obscur de la force"
         When I switch to "edit" mode
         And I edit the "Force" widget
-        Then I should see "Attention ! Ce contenu appartient à un modèle parent"
+        And I wait 3 seconds
+        Then I should see "Attention !"
+        And I should see "Ce contenu appartient à un modèle parent"
         And I follow "modifier le contenu original"
         And I wait 5 seconds
-        Then I should not see "Attention ! Ce contenu appartient à un modèle parent"
+        Then I should not see "Attention !"
+        And I should not see "Ce contenu appartient à un modèle parent"
         When I fill in "Côté de la force" with "Dark"
         And I submit the widget
         Given I am on "/fr/victoire-dcms/business-template/show/4"
