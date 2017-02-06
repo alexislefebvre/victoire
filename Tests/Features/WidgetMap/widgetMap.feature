@@ -119,7 +119,8 @@ Scenario: I delete widget from simple page
   And I edit the "Text" widget
   Then I should see "Supprimer"
   Given I follow "Supprimer"
-  Then I should see "Cette action va définitivement supprimer ce contenu. Cette action est irréversible. Êtes-vous sûr ?"
+  Then I should see "Cette action va définitivement supprimer ce contenu. Cette action est irréversible."
+  And I should see "Êtes-vous sûr ?"
   Given I press "J'ai bien compris, je confirme la suppression"
   And I reload the page
   And "Widget 3" should precede "Widget 2"

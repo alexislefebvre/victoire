@@ -96,6 +96,14 @@ class MinkContext extends KFMinkContext
             return false;
         }
 
+        // Sensitive case search
+        /** @see http://stackoverflow.com/questions/3655549/xpath-containstext-some-string-doesnt-work-when-used-with-node-with-more/3655588#3655588 */
+        $item = $element->find('xpath', '//*[text()[contains(., "'.$value.'")]]');
+
+        if ($item) {
+            return $item;
+        }
+
         // Hack to do an insensitive case search
         $alphabetLower = '"'.implode('', range('a', 'z')).'"';
         $alphabetUpper = '"'.implode('', range('A', 'Z')).'"';
