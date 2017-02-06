@@ -20,6 +20,7 @@ use Victoire\Bundle\BusinessPageBundle\Entity\BusinessTemplate;
 use Victoire\Bundle\CoreBundle\Entity\View;
 use Victoire\Bundle\CoreBundle\Helper\CurrentViewHelper;
 use Victoire\Bundle\QueryBundle\Entity\VictoireQueryInterface;
+use Victoire\Bundle\QueryBundle\Helper\Exception\OrderByClauseException;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
@@ -142,9 +143,9 @@ class QueryHelper
         //Add ORDER BY if set
         if ($orderBy = json_decode($containerEntity->getOrderBy(), true)) {
             foreach ($orderBy as $addOrderBy) {
-                // Ignore this order if one parameters is missing.
+                // Ignore this order if one parameter is missing.
                 if ((!isset($addOrderBy['by'])) || (!isset($addOrderBy['order']))) {
-                    continue;
+                    throw new OrderByClauseException($addOrderBy);
                 }
 
                 $reflectionClass = new \ReflectionClass($itemsQueryBuilder->getRootEntities()[0]);
