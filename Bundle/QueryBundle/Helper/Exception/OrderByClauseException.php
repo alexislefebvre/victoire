@@ -14,13 +14,13 @@ class OrderByClauseException extends \Exception
         $messages = [];
 
         if (!isset($addOrderBy['by'])) {
-            $messages[] = sprintf('Oh no! "by" parameter is missing');
+            $messages[] = sprintf('"by" parameter is missing');
         }
         if (!isset($addOrderBy['order'])) {
-            $messages[] = sprintf('Oh no! "order" parameter is missing');
+            $messages[] = sprintf('"order" parameter is missing');
         }
 
-        $message = implode(', ', $messages);
+        $message = sprintf('Oh no! Some parameters are missing: %s', implode(', ', $messages));
 
         parent::__construct($message);
     }
