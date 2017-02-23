@@ -29,10 +29,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new JMS\AopBundle\JMSAopBundle(),
-            new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
@@ -94,48 +91,5 @@ class AppKernel extends Kernel
     public function getLogDir()
     {
         return sys_get_temp_dir().'/Victoire/logs/'.$this->environment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function shutdown()
-    {
-        if ($this->environment === 'ci') {
-            if (false === $this->booted) {
-                return;
-            }
-
-            $container = $this->container;
-            parent::shutdown();
-            $this->cleanupContainer($container);
-        } else {
-            parent::shutdown();
-        }
-    }
-
-    /**
-     * Remove all container references from all loaded services.
-     */
-    protected function cleanupContainer($container)
-    {
-        $object = new \ReflectionObject($container);
-        $property = $object->getProperty('services');
-        $property->setAccessible(true);
-        $services = $property->getValue($container) ?: [];
-        foreach ($services as $id => $service) {
-            if ('kernel' === $id) {
-                continue;
-            }
-            $serviceObject = new \ReflectionObject($service);
-            foreach ($serviceObject->getProperties() as $prop) {
-                $prop->setAccessible(true);
-                if ($prop->isStatic()) {
-                    continue;
-                }
-                $prop->setValue($service, null);
-            }
-        }
-        $property->setValue($container, null);
     }
 }
