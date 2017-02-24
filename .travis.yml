@@ -8,7 +8,7 @@ cache:
 php:
   - 5.6
   - 7.0
-  - 7.1
+#  - 7.1
 #  - hhvm
 
 services:
@@ -33,6 +33,8 @@ before_script:
   - composer require symfony/symfony:${SYMFONY_VERSION} --no-update
   - composer install --no-interaction -vv --profile --no-progress
   - cp -v Tests/Functionnal/app/config/parameters.yml.dist Tests/Functionnal/app/config/parameters.yml
+  # Update MySQL database user
+  - "sed -i 's#dbuser: \"ubuntu\"#dbuser: \"root\"#' Tests/Functionnal/app/config/parameters.yml"
   # Prepare database
   - php Tests/Functionnal/bin/console --env=test doctrine:database:create
   - php Tests/Functionnal/bin/console --env=test doctrine:schema:create
