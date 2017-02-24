@@ -28,6 +28,7 @@ before_script:
   - phpenv config-add travis.php.ini
   - npm install less
   - mkdir fails
+  - mysql -e 'CREATE DATABASE victoire;'
   - composer self-update
   - composer require symfony/symfony:${SYMFONY_VERSION} --no-update
   - composer install --no-interaction -vv --profile --no-progress
