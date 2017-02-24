@@ -52,18 +52,4 @@ before_script:
 
 script:
 #  - './vendor/bin/behat Tests/Features/BusinessEntityPage'
-  - 'phpunit --coverage-text'
-
-after_script:
-  - php Tests/Functionnal/bin/console --env=test doctrine:database:drop --force
-
-after_failure:
-  - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "fails/*.log"
-  - vendor/lakion/mink-debug-extension/travis/tools/upload-screenshots "fails/*.png"
-
-cache:
-  directories:
-    - $HOME/.composer/cache
-
-notifications:
-    slack: appventus:Xy4yq4kXpBK9XHgfz8t9VBPl
+#  - 'phpunit --coverage-text'
