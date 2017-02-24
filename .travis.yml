@@ -28,7 +28,7 @@ before_script:
   - npm install less
   - mkdir fails
   - composer self-update
-  - COMPOSER_ROOT_VERSION=1.5 composer require symfony/symfony:${SYMFONY_VERSION} $DEPENDENCY --no-update
+  - COMPOSER_ROOT_VERSION=2.2 composer require symfony/symfony:${SYMFONY_VERSION} $DEPENDENCY --no-update
   - composer install --no-interaction -vv --profile --no-progress
   # Prepare database
   - php Tests/Functionnal/bin/console --env=test doctrine:database:create
