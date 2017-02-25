@@ -46,12 +46,12 @@ before_script:
   - php Tests/Functionnal/bin/console --env=test assetic:dump
   - nohup php Tests/Functionnal/bin/console --env=test server:run -r vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_prod.php &
   # Run selenium server
-#  - "sh -e /etc/init.d/xvfb start"
-#  - "export DISPLAY=:99.0"
-#  - "wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar"
-#  - "nohup java -jar selenium-server-standalone-2.53.1.jar > /dev/null &"
+  - "sh -e /etc/init.d/xvfb start"
+  - "export DISPLAY=:99.0"
+  - "wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar"
+  - "nohup java -jar selenium-server-standalone-2.53.1.jar > /dev/null &"
   - sleep 5
 
 script:
-#  - './vendor/bin/behat Tests/Features/BusinessEntityPage'
+  - './vendor/bin/behat Tests/Features/BusinessEntityPage'
 #  - 'phpunit --coverage-text'
