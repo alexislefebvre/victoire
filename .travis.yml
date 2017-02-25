@@ -3,7 +3,7 @@ language: php
 
 cache:
   directories:
-    - $HOME/.cache/composer/
+    - $HOME/.composer/cache/
 
 php:
   - 7.1
