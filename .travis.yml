@@ -62,5 +62,5 @@ before_script:
   - sleep 5
 
 script:
-  - './vendor/bin/behat Tests/Features/BusinessEntityPage'
+  - './vendor/bin/behat Tests/Features/BusinessEntityPage/delete.feature'
 #  - 'phpunit --coverage-text'
