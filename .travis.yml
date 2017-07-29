@@ -30,6 +30,7 @@ matrix:
   fast_finish: true
 
 addons:
+  firefox: "latest-esr"
   hosts:
     - fr.victoire.io
     - en.victoire.io
