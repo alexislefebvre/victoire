@@ -57,6 +57,8 @@ before_script:
   - cp -v Tests/App/app/config/parameters.yml.dist Tests/App/app/config/parameters.yml
   # Update MySQL database user
   - "sed -i 's#dbuser: \"ubuntu\"#dbuser: \"root\"#' Tests/App/app/config/parameters.yml"
+  # Disable code coverage for Behat
+  - "sed -i '/CoverageContext/d' behat.yml* && echo \"CoverageContext disabled\""
   # Prepare database
   - php Tests/App/bin/console --env=test doctrine:database:create
   - php Tests/App/bin/console --env=test doctrine:schema:create
@@ -78,4 +80,4 @@ before_script:
 script:
   - './vendor/bin/behat Tests/Features/Page/create.feature'
   - './vendor/bin/behat Tests/Features/Page/sitemap.feature'
-  - 'phpunit --coverage-text'
+  - './vendor/bin/phpunit'
