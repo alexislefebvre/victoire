@@ -35,6 +35,16 @@ addons:
     - fr.victoire.io
     - en.victoire.io
 
+# Use public URLs for git submodule in order to avoid API rate limit
+# Source: https://stackoverflow.com/questions/15674064/github-submodule-access-rights-travis-ci/24600210#24600210
+# Handle git submodules yourself
+git:
+  submodules: false
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+
 before_script:
   - phpenv config-add travis.php.ini
   - npm install less
