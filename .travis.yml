@@ -15,7 +15,7 @@ services:
 
 env:
   - SYMFONY_VERSION="2.8.*"
-  - SYMFONY_VERSION="3.2.*"
+  - SYMFONY_VERSION="3.3.*"
 
 matrix:
   include:
@@ -25,7 +25,7 @@ matrix:
       env: SYMFONY_VERSION="3.2.*"
     - php: 7.0
       env: SYMFONY_VERSION="2.8.*"
-    - php: hhvm
+    - php: 7.0
       env: SYMFONY_VERSION="3.2.*"
   fast_finish: true
 
