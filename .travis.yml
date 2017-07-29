@@ -65,4 +65,4 @@ before_script:
 script:
   - './vendor/bin/behat Tests/Features/Page/create.feature'
   - './vendor/bin/behat Tests/Features/Page/sitemap.feature'
-#  - 'phpunit --coverage-text'
+  - 'phpunit --coverage-text'
