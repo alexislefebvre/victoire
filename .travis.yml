@@ -52,20 +52,20 @@ before_script:
   - composer self-update
   - composer require symfony/symfony:${SYMFONY_VERSION} --no-update
   - composer install --no-interaction -vv --profile --no-progress
-  - cp -v Tests/Functionnal/app/config/parameters.yml.dist Tests/Functionnal/app/config/parameters.yml
+  - cp -v Tests/App/app/config/parameters.yml.dist Tests/App/app/config/parameters.yml
   # Update MySQL database user
-  - "sed -i 's#dbuser: \"ubuntu\"#dbuser: \"root\"#' Tests/Functionnal/app/config/parameters.yml"
+  - "sed -i 's#dbuser: \"ubuntu\"#dbuser: \"root\"#' Tests/App/app/config/parameters.yml"
   # Prepare database
-  - php Tests/Functionnal/bin/console --env=test doctrine:database:create
-  - php Tests/Functionnal/bin/console --env=test doctrine:schema:create
-  - php Tests/Functionnal/bin/console --env=test cache:warmup
-  - php Tests/Functionnal/bin/console --env=test victoire:generate:view
-  - php Tests/Functionnal/bin/console --env=test assets:install Tests/Functionnal/web
-  - php Tests/Functionnal/bin/console --env=test bazinga:js-translation:dump
-  - php Tests/Functionnal/bin/console --env=test fos:js:dump --target="Tests/Functionnal/web/js/fos_js_routes_test.js"
-  - php Tests/Functionnal/bin/console --env=domain fos:js:dump --target="Tests/Functionnal/web/js/fos_js_routes_domain.js"
-  - php Tests/Functionnal/bin/console --env=test assetic:dump
-  - nohup php Tests/Functionnal/bin/console --env=test server:run -r vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_prod.php &
+  - php Tests/App/bin/console --env=test doctrine:database:create
+  - php Tests/App/bin/console --env=test doctrine:schema:create
+  - php Tests/App/bin/console --env=test cache:warmup
+  - php Tests/App/bin/console --env=test victoire:generate:view
+  - php Tests/App/bin/console --env=test assets:install Tests/App/web
+  - php Tests/App/bin/console --env=test bazinga:js-translation:dump
+  - php Tests/App/bin/console --env=test fos:js:dump --target="Tests/App/web/js/fos_js_routes_test.js"
+  - php Tests/App/bin/console --env=domain fos:js:dump --target="Tests/App/web/js/fos_js_routes_domain.js"
+  - php Tests/App/bin/console --env=test assetic:dump
+  - nohup php Tests/App/bin/console --env=test server:run -r vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_prod.php &
   # Run selenium server
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
