@@ -51,7 +51,7 @@ assetic:
                 - "/usr/lib/node_modules"
                 - "%kernel.root_dir%/../../../node_modules"
                 - "/usr/local/lib/node_modules"
-            apply_to: \.less$
+            apply_to: "\\.less$"
 
 # Doctrine Configuration
 doctrine:

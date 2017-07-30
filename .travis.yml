@@ -1,59 +1,77 @@
+dist: trusty
 sudo: false
 language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache/
+
 php:
-  - 5.6
+  - 7.1
 
 services:
   - mysql
   - redis-server
 
 env:
-  - IMGUR_API_KEY=b3625162d3418ac51a9ee805b1840452
+  - SYMFONY_VERSION="3.2.*"
+  - SYMFONY_VERSION="3.3.*"
+  - SYMFONY_VERSION="3.4.*"
+
+matrix:
+  include:
+    - php: 7.0
+      env: SYMFONY_VERSION="3.4.*"
+    - php: 7.2
+      env: SYMFONY_VERSION="3.4.*"
+  fast_finish: true
 
 addons:
+  firefox: "47.0.1"
   hosts:
     - fr.victoire.io
     - en.victoire.io
+
+# Use public URLs for git submodule in order to avoid API rate limit
+# Source: https://stackoverflow.com/questions/15674064/github-submodule-access-rights-travis-ci/24600210#24600210
+# Handle git submodules yourself
+git:
+  submodules: false
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
 
 before_script:
   - phpenv config-add travis.php.ini
   - npm install less
   - mkdir fails
   - composer self-update
-  - composer config --global github-oauth.github.com $gh_auth_token
-  - COMPOSER_ROOT_VERSION=1.5 composer install --prefer-dist
+  - composer require symfony/symfony:${SYMFONY_VERSION} --no-update
+  - composer install --no-interaction -vv --profile --no-progress
+  - cp -v Tests/App/app/config/parameters.yml.dist Tests/App/app/config/parameters.yml
+  # Update MySQL database user
+  - "sed -i 's#dbuser: \"ubuntu\"#dbuser: \"root\"#' Tests/App/app/config/parameters.yml"
+  # Disable code coverage for Behat
+  - "sed -i '/CoverageContext/d' behat.yml* && echo \"CoverageContext disabled\""
   # Prepare database
-  - php Tests/Functionnal/bin/console --env=test doctrine:database:create
-  - php Tests/Functionnal/bin/console --env=test doctrine:schema:create
-  - php Tests/Functionnal/bin/console --env=test cache:warmup
-  - php Tests/Functionnal/bin/console --env=test victoire:generate:view
-  - php Tests/Functionnal/bin/console --env=test assets:install Tests/Functionnal/web
-  - php Tests/Functionnal/bin/console --env=test bazinga:js-translation:dump
-  - php Tests/Functionnal/bin/console --env=test fos:js:dump --target="Tests/Functionnal/web/js/fos_js_routes_test.js"
-  - php Tests/Functionnal/bin/console --env=domain fos:js:dump --target="Tests/Functionnal/web/js/fos_js_routes_domain.js"
-  - php Tests/Functionnal/bin/console --env=test assetic:dump
-  - nohup php Tests/Functionnal/bin/console --env=test server:run -r vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_prod.php &
+  - php Tests/App/bin/console --env=test doctrine:database:create
+  - php Tests/App/bin/console --env=test doctrine:schema:create
+  - php Tests/App/bin/console --env=test cache:warmup
+  - php Tests/App/bin/console --env=test victoire:generate:view
+  - php Tests/App/bin/console --env=test assets:install Tests/App/web
+  - php Tests/App/bin/console --env=test bazinga:js-translation:dump
+  - php Tests/App/bin/console --env=test fos:js:dump --target="Tests/App/web/js/fos_js_routes_test.js"
+  - php Tests/App/bin/console --env=domain fos:js:dump --target="Tests/App/web/js/fos_js_routes_domain.js"
+  - php Tests/App/bin/console --env=test assetic:dump
+  - nohup php Tests/App/bin/console --env=test server:run -r vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_prod.php &
   # Run selenium server
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
-  - "wget http://selenium-release.storage.googleapis.com/2.49/selenium-server-standalone-2.49.0.jar"
-  - "nohup java -jar selenium-server-standalone-2.49.0.jar > /dev/null &"
+  - "wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar"
+  - "nohup java -jar selenium-server-standalone-2.53.1.jar > /dev/null &"
   - sleep 5
 
 script:
-  - './vendor/bin/behat'
-  - 'phpunit --coverage-text'
-
-after_script:
-  - php Tests/Functionnal/bin/console --env=test doctrine:database:drop --force
-
-after_failure:
-  - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "fails/*.log"
-  - vendor/lakion/mink-debug-extension/travis/tools/upload-screenshots "fails/*.png"
-
-cache:
-  directories:
-    - $HOME/.composer/cache
-
-notifications:
-    slack: appventus:Xy4yq4kXpBK9XHgfz8t9VBPl
+  - './vendor/bin/behat Tests/Features/Navigation/authentication.feature'
+  - './vendor/bin/behat Tests/Features/Widget/delete.feature'
