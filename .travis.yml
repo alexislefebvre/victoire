@@ -78,8 +78,5 @@ before_script:
   - sleep 5
 
 script:
-  - './vendor/bin/behat Tests/Features/Blog/create.feature'
-  - './vendor/bin/behat Tests/Features/BusinessEntityPage/delete.feature'
   - './vendor/bin/behat Tests/Features/Navigation/authentication.feature'
-  - './vendor/bin/behat Tests/Features/Page/create.feature'
   - './vendor/bin/behat Tests/Features/Widget/delete.feature'
