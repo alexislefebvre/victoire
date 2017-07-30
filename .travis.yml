@@ -32,7 +32,7 @@ matrix:
   fast_finish: true
 
 addons:
-  firefox: "latest-esr"
+  firefox: "47.0.1"
   hosts:
     - fr.victoire.io
     - en.victoire.io
