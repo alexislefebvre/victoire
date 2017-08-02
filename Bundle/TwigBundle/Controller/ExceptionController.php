@@ -12,11 +12,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Symfony\Component\Routing\Router;
 
-// BC for Symfony ≤ 2.8
-if (class_exists('Symfony\Component\HttpKernel\Exception\FlattenException')) {
-    class_alias('Symfony\Component\HttpKernel\Exception\FlattenException', 'FlattenException');
-}
-
 /**
  * Redirects to a victoire error page when facing a Flatted Exception.
  */
