@@ -4,6 +4,7 @@ namespace Victoire\Bundle\TwigBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController as BaseExceptionController;
+use Symfony\Component\Debug\Exception\FlattenException as FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,9 +14,7 @@ use Symfony\Component\Routing\Router;
 
 // BC for Symfony ≤ 2.8
 if (class_exists('Symfony\Component\HttpKernel\Exception\FlattenException')) {
-    class_alias('Symfony\Component\HttpKernel\Exception\FlattenException', 'BaseFlattenException');
-} else {
-    class_alias('Symfony\Component\Debug\Exception\FlattenException', 'BaseFlattenException');
+    class_alias('Symfony\Component\HttpKernel\Exception\FlattenException', 'FlattenException');
 }
 
 /**
@@ -71,7 +70,7 @@ class ExceptionController extends BaseExceptionController
      *
      * @return Response
      */
-    public function showAction(Request $request, BaseFlattenException $exception, DebugLoggerInterface $logger = null)
+    public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null)
     {
         $currentContent = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
         $code = $exception->getStatusCode();
@@ -90,7 +89,7 @@ class ExceptionController extends BaseExceptionController
             $page = $this->em->getRepository('VictoireTwigBundle:ErrorPage')->findOneByCode($code);
             if ($page) {
                 return $this->forward('VictoireTwigBundle:ErrorPage:show', [
-                        'code'    => $page->getCode(),
+                    'code'    => $page->getCode(),
                 ]);
             }
         }
