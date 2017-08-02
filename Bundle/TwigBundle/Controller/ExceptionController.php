@@ -71,7 +71,7 @@ class ExceptionController extends BaseExceptionController
      *
      * @return Response
      */
-    public function showAction(Request $request, BaseFlattenException $exception, DebugLoggerInterface $logger = null, $_format = 'html')
+    public function showAction(Request $request, BaseFlattenException $exception, DebugLoggerInterface $logger = null)
     {
         $currentContent = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
         $code = $exception->getStatusCode();
@@ -96,7 +96,7 @@ class ExceptionController extends BaseExceptionController
         }
 
         return new Response($this->twig->render(
-            $this->findTemplate($request, $_format, $code, $this->debug),
+            $this->findTemplate($request, 'html', $code, $this->debug),
             [
                 'status_code'    => $code,
                 'status_text'    => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
