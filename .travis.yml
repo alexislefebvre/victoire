@@ -55,16 +55,16 @@ before_script:
   # Disable code coverage for Behat
   - "sed -i '/CoverageContext/d' behat.yml* && echo \"CoverageContext disabled\""
   # Prepare database
-  - php Tests/App/bin/console --env=test doctrine:database:create
-  - php Tests/App/bin/console --env=test doctrine:schema:create
-  - php Tests/App/bin/console --env=test cache:warmup
-  - php Tests/App/bin/console --env=test victoire:generate:view
-  - php Tests/App/bin/console --env=test assets:install Tests/App/web
-  - php Tests/App/bin/console --env=test bazinga:js-translation:dump
-  - php Tests/App/bin/console --env=test fos:js:dump --target="Tests/App/web/js/fos_js_routes_test.js"
-  - php Tests/App/bin/console --env=domain fos:js:dump --target="Tests/App/web/js/fos_js_routes_domain.js"
-  - php Tests/App/bin/console --env=test assetic:dump
-  - nohup php Tests/App/bin/console --env=test server:run -r vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_prod.php &
+  - php Tests/App/bin/console --env=ci doctrine:database:create
+  - php Tests/App/bin/console --env=ci doctrine:schema:create
+  - php Tests/App/bin/console --env=ci cache:warmup
+  - php Tests/App/bin/console --env=ci victoire:generate:view
+  - php Tests/App/bin/console --env=ci assets:install Tests/App/web
+  - php Tests/App/bin/console --env=ci bazinga:js-translation:dump
+  - php Tests/App/bin/console --env=ci fos:js:dump --target="Tests/App/web/js/fos_js_routes_test.js"
+#  - php Tests/App/bin/console --env=domain fos:js:dump --target="Tests/App/web/js/fos_js_routes_domain.js"
+  - php Tests/App/bin/console --env=ci assetic:dump
+  - nohup php Tests/App/bin/console --env=ci server:run -r Tests/App/app/config/router_ci.php &
   # Run selenium server
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
