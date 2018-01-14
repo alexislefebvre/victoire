@@ -7,23 +7,18 @@ cache:
     - $HOME/.composer/cache/
 
 php:
+#  - 7.0
   - 7.1
+  - 7.2
 
 services:
   - mysql
   - redis-server
 
 env:
-  - SYMFONY_VERSION="3.2.*"
-  - SYMFONY_VERSION="3.3.*"
   - SYMFONY_VERSION="3.4.*"
 
 matrix:
-  include:
-    - php: 7.0
-      env: SYMFONY_VERSION="3.4.*"
-    - php: 7.2
-      env: SYMFONY_VERSION="3.4.*"
   fast_finish: true
 
 addons:
