@@ -27,7 +27,7 @@ matrix:
   fast_finish: true
 
 addons:
-  firefox: "47.0.1"
+  firefox: "latest-esr"
   hosts:
     - fr.victoire.io
     - en.victoire.io
@@ -68,8 +68,8 @@ before_script:
   # Run selenium server
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
-  - "wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar"
-  - "nohup java -jar selenium-server-standalone-2.53.1.jar > /dev/null &"
+  - "wget http://selenium-release.storage.googleapis.com/3.8/selenium-server-standalone-3.8.1.jar"
+  - "nohup java -jar selenium-server-standalone-3.8.1.jar > /dev/null &"
   - sleep 5
 
 script:
