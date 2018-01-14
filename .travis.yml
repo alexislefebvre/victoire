@@ -59,7 +59,7 @@ before_script:
   - php Tests/App/bin/console --env=ci fos:js:dump --target="Tests/App/web/js/fos_js_routes_test.js"
 #  - php Tests/App/bin/console --env=domain fos:js:dump --target="Tests/App/web/js/fos_js_routes_domain.js"
   - php Tests/App/bin/console --env=ci assetic:dump
-  - nohup php Tests/App/bin/console --env=ci server:run -r Tests/App/app/config/router_ci.php &
+  - nohup php Tests/App/bin/console --env=ci server:run -r Tests/App/app/config/router_ci.php --docroot=Tests/App/web/ &
   # Run selenium server
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
