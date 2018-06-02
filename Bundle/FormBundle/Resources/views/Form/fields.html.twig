@@ -806,9 +806,14 @@
 {% endblock %}
 
 {% block view_reference_widget %}
-    {{ block('choice_widget') }}
+    {# https://stackoverflow.com/questions/31355662/symfony-forms-html5-datalist/31361718#31361718 #}
+    {% set list_id = id ~ '_list' %}
+    {% set attr = attr|merge({'list': list_id}) %}
+    {{ block('form_widget_simple') }}
 
-    <script>
-        $vic('#{{ id }}').select2();
-    </script>
+    <datalist id="{{ list_id }}">
+        {% for id, choice in choices %}
+            <option value="{{ id }}">{{ choice }}</option>
+        {% endfor %}
+    </datalist>
 {% endblock %}
